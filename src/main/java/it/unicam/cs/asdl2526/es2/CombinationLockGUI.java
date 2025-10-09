@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
  * GUI per usare una combination lock che ha come combinazione tre lettere
  * maiuscole.
  * Le componenti della GUI sono state generate automaticamente con Apache
- * NetBeans IDE 12.0 - https://netbeans.org/
- * 
+ * NetBeans IDE 12.0 - <a href="https://netbeans.org/">...</a>
+ *
  * @author Luca Tesei
  */
 public class CombinationLockGUI extends javax.swing.JFrame {
