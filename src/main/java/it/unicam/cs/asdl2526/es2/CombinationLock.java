@@ -18,9 +18,9 @@ public class CombinationLock {
      * @param aCombination
      *                         la combinazione che deve essere una stringa di 3
      *                         lettere maiuscole dell'alfabeto inglese
-     * @throw IllegalArgumentException se la combinazione fornita non è una
+     * @throws IllegalArgumentException se la combinazione fornita non è una
      *        stringa di 3 lettere maiuscole dell'alfabeto inglese
-     * @throw NullPointerException se la combinazione fornita è nulla
+     * @throws NullPointerException se la combinazione fornita è nulla
      */
     public CombinationLock(String aCombination) {
         // TODO implementare
@@ -82,9 +82,9 @@ public class CombinationLock {
      * @param aCombination
      *                         la nuova combinazione che deve essere una stringa
      *                         di 3 lettere maiuscole dell'alfabeto inglese
-     * @throw IllegalArgumentException se la combinazione fornita non è una
+     * @throws IllegalArgumentException se la combinazione fornita non è una
      *        stringa di 3 lettere maiuscole dell'alfabeto inglese
-     * @throw NullPointerException se la combinazione fornita è nulla
+     * @throws NullPointerException se la combinazione fornita è nulla
      */
     public void lockAndChangeCombination(String aCombination) {
         // TODO implementare

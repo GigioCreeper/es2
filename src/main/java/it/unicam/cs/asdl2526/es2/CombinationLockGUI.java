@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 /**
  * GUI per usare una combination lock che ha come combinazione tre lettere
  * maiuscole.
- * 
  * Le componenti della GUI sono state generate automaticamente con Apache
  * NetBeans IDE 12.0 - https://netbeans.org/
  * 
@@ -317,7 +316,7 @@ public class CombinationLockGUI extends javax.swing.JFrame {
      * @param args
      *                 the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting
         // code (optional) ">

@@ -14,8 +14,8 @@ public class Burglar {
     /**
      * Costruisce uno scassinatore per una certa cassaforte.
      * 
-     * @param aCombinationLock
-     * @throw NullPointerException se la cassaforte passata è nulla
+     * @param aCombinationLock la cassaforte da scassinare
+     * @throws NullPointerException se la cassaforte passata è nulla
      */
     public Burglar(CombinationLock aCombinationLock) {
         // TODO implementare
