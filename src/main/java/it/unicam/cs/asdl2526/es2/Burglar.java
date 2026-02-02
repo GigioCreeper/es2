@@ -8,8 +8,11 @@ package it.unicam.cs.asdl2526.es2;
  *
  */
 public class Burglar {
-
     // TODO inserire le variabili istanza che servono
+
+    private CombinationLock safe;
+    private long attempts;
+    private String result;
 
     /**
      * Costruisce uno scassinatore per una certa cassaforte.
@@ -19,6 +22,10 @@ public class Burglar {
      */
     public Burglar(CombinationLock aCombinationLock) {
         // TODO implementare
+        if (aCombinationLock == null) {throw new NullPointerException("aCombinationLock cannot be null");}
+        else {
+            this.safe = aCombinationLock;
+        }
     }
 
     /**
@@ -28,7 +35,23 @@ public class Burglar {
      */
     public String findCombination() {
         // TODO implementare
-        return null;
+        for (char c = 'A'; c <= 'Z'; c++) {
+            for (char c1 = 'A'; c1 <= 'Z'; c1++) {
+                for (char c2 = 'A'; c2 <= 'Z'; c2++) {
+                    safe.setPosition(c);
+                    safe.setPosition(c1);
+                    safe.setPosition(c2);
+                    attempts++;
+                    safe.open();
+
+                    if (safe.isOpen()){
+                        result = ""+c+c1+c2;
+                        return  result;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -41,6 +64,7 @@ public class Burglar {
      */
     public long getAttempts() {
         // TODO implementare
-        return -1;
+        if (safe.isOpen()) return attempts;
+        else return -1;
     }
 }
