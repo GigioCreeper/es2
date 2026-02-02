@@ -1,5 +1,7 @@
 package it.unicam.cs.asdl2526.es2;
 
+import java.util.regex.*;
+
 /**
  * Un oggetto cassaforte con combinazione ha una manopola che può essere
  * impostata su certe posizioni contrassegnate da lettere maiuscole. La
@@ -11,7 +13,10 @@ package it.unicam.cs.asdl2526.es2;
 public class CombinationLock {
 
     // TODO inserire le variabili istanza che servono
-
+        private char aPosition;
+        private String currentCombination;
+        private String aCombination;
+        boolean locked;
     /**
      * Costruisce una cassaforte <b>aperta</b> con una data combinazione
      * 
@@ -24,10 +29,20 @@ public class CombinationLock {
      */
     public CombinationLock(String aCombination) {
         // TODO implementare
+        if (aCombination != null && aCombination.matches("[A-Z]{3}")){
+                this.aCombination = aCombination;
+                this.currentCombination = "";
+                this.locked = false;
+                this.aPosition = aCombination.charAt(0);
+            }
+            else if(aCombination == null || aCombination.isEmpty()) throw new NullPointerException("aCombination cannot be null");
+            else  {throw new IllegalArgumentException("Invalid combination");}
+
+
     }
 
     /**
-     * Imposta la manopola su una certaposizione.
+     * Imposta la manopola su una certa posizione.
      * 
      * @param aPosition
      *                      un carattere lettera maiuscola su cui viene
@@ -39,6 +54,20 @@ public class CombinationLock {
      */
     public void setPosition(char aPosition) {
         // TODO implementare
+        if(aPosition >= 'A' && aPosition <= 'Z'){
+            this.aPosition = aPosition;
+            if (currentCombination.length() < 3){
+                currentCombination += aPosition;
+            } else {
+
+                for (int i = 0 ; i < currentCombination.length()-2; i++){
+                    currentCombination = currentCombination.replace(currentCombination.charAt(i), currentCombination.charAt(i+1));
+                }
+                currentCombination += aPosition;
+            }
+
+        }
+        else throw new IllegalArgumentException("aPosition must be in range ['A','Z']");
     }
 
     /**
@@ -48,17 +77,21 @@ public class CombinationLock {
      * prossimi tentativi di apertura.
      */
     public void open() {
-        // TODO implementare
+        if (this.locked){
+                if (currentCombination.equals(aCombination)){
+                    locked = false;
+                } else currentCombination = "";
+        }
     }
 
     /**
      * Determina se la cassaforte è aperta.
-     * 
+     *
      * @return true se la cassaforte è attualmente aperta, false altrimenti
      */
     public boolean isOpen() {
         // TODO implementare
-        return false;
+        return !this.locked;
     }
 
     /**
@@ -70,6 +103,10 @@ public class CombinationLock {
      */
     public void lock() {
         // TODO implementare
+        if(isOpen()) {
+            locked = true;
+            currentCombination = "";
+        }
     }
 
     /**
@@ -78,7 +115,7 @@ public class CombinationLock {
      * rimane chiusa e la combinazione non viene cambiata, ma in questo caso le
      * le lettere impostate precedentemente non devono essere considerate per i
      * prossimi tentativi di apertura.
-     * 
+     *
      * @param aCombination
      *                         la nuova combinazione che deve essere una stringa
      *                         di 3 lettere maiuscole dell'alfabeto inglese
@@ -88,5 +125,20 @@ public class CombinationLock {
      */
     public void lockAndChangeCombination(String aCombination) {
         // TODO implementare
+        if (aCombination == null || aCombination.isEmpty()) {
+            currentCombination = "";
+            throw new NullPointerException("aCombination cannot be null");
+        }
+        else {
+            if (isOpen()) {
+                if (aCombination.matches("[A-Z]{3}")) {
+                    this.aCombination = aCombination;
+                    this.locked = true;
+                    this.currentCombination = "";
+                } else {
+                    throw new IllegalArgumentException("Invalid combination");
+                }
+            }
+        }
     }
 }
