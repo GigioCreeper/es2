@@ -17,6 +17,7 @@ public class CombinationLock {
         private String currentCombination;
         private String aCombination;
         boolean locked;
+        boolean justlocked;
     /**
      * Costruisce una cassaforte <b>aperta</b> con una data combinazione
      * 
@@ -33,6 +34,7 @@ public class CombinationLock {
                 this.aCombination = aCombination;
                 this.currentCombination = "";
                 this.locked = false;
+                this.justlocked = false;
                 this.aPosition = aCombination.charAt(0);
             }
             else if(aCombination == null || aCombination.isEmpty()) throw new NullPointerException("aCombination cannot be null");
@@ -55,6 +57,7 @@ public class CombinationLock {
     public void setPosition(char aPosition) {
         // TODO implementare
         if(aPosition >= 'A' && aPosition <= 'Z'){
+            this.justlocked = false;
             this.aPosition = aPosition;
             if (currentCombination.length() < 3){
                 currentCombination += aPosition;
@@ -77,10 +80,13 @@ public class CombinationLock {
      * prossimi tentativi di apertura.
      */
     public void open() {
-        if (this.locked){
-                if (currentCombination.equals(aCombination)){
-                    locked = false;
-                } else currentCombination = "";
+        if (this.locked) {
+            if (justlocked && currentCombination.equals(aCombination)) {
+                return;
+            }
+            if (currentCombination.equals(aCombination)) {
+                locked = false;
+            } else currentCombination = "";
         }
     }
 
@@ -104,6 +110,7 @@ public class CombinationLock {
     public void lock() {
         // TODO implementare
         if(isOpen()) {
+            justlocked = true;
             locked = true;
             currentCombination = "";
         }
@@ -134,6 +141,7 @@ public class CombinationLock {
                 if (aCombination.matches("[A-Z]{3}")) {
                     this.aCombination = aCombination;
                     this.locked = true;
+                    this.justlocked = true;
                     this.currentCombination = "";
                 } else {
                     throw new IllegalArgumentException("Invalid combination");
